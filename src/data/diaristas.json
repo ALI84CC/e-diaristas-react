@@ -1,0 +1,31 @@
+{
+  "diaristas": [
+    {
+      "id": 1,
+      "nome": "Maria Silva",
+      "foto": "https://github.com/maria-silva.png",
+      "reputacao": 5,
+      "cidade": "Ananindeua",
+      "descricao": "Especialista em limpeza pesada e organização de armários.",
+      "valor_hora": 45.00
+    },
+    {
+      "id": 2,
+      "nome": "João Santos",
+      "foto": "https://github.com/joao-santos.png",
+      "reputacao": 4,
+      "cidade": "Belém",
+      "descricao": "Limpeza residencial rápida e eficiente.",
+      "valor_hora": 40.00
+    },
+    {
+      "id": 3,
+      "nome": "Ana Oliveira",
+      "foto": "https://github.com/ana-oliveira.png",
+      "reputacao": 5,
+      "cidade": "Ananindeua",
+      "descricao": "Cuidado especial com pets e plantas durante a faxina.",
+      "valor_hora": 50.00
+    }
+  ]
+}
