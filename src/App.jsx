@@ -1,12 +1,20 @@
 import './index.css'
 import { DiaristasCards } from './components/DiaristasCard'
 import dados from './data/diaristas.json';
+import { BrowserRouter, Routes } from 'react-router-dom';
+import { Navbar } from './components/Navbar';
 
 function App() {
   
   return (
-   
-    <div className='min-h-screem bg-gray-50 p-6'>
+    <>
+    <BrowserRouter>
+    < Navbar/>
+    </BrowserRouter>
+   </>
+
+
+    /*<div className='min-h-screem bg-gray-50 p-6'>
      
       <div className='max-w-2xl mx-auto'>
         <header className='mb-8 text-center'>
@@ -19,7 +27,7 @@ function App() {
          ))}
         </main> 
      </div> 
-    </div>
+    </div>*/
   );
 }
 
