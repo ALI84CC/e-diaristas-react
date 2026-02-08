@@ -1,6 +1,6 @@
 import { Star } from "lucide-react";
 
-export function DiaristasCards({diaristas}){
+export default function DiaristasCard({diaristas}){
     return(
         <div className="flex bg-white border border-gray-200 rounded-lg shadow-sm p-4 gap-4 hover:shadow-md transition-shadow mb-4">
             {/*foto do perfil*/}

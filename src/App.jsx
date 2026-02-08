@@ -1,17 +1,23 @@
 import './index.css'
-import { DiaristasCards } from './components/DiaristasCard'
+import DiaristasCards  from './components/DiaristasCard'
 import dados from './data/diaristas.json';
-import { BrowserRouter, Routes } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
+import  Busca  from './pages/Busca';
+import  Home  from './pages/Home';
 
 function App() {
   
   return (
-    <>
+  
     <BrowserRouter>
-    < Navbar/>
+    <Navbar/>
+    <Routes>
+      <Route path='/' element={<Busca dadosDiaristas={dados}/>} />
+      <Route path='/Home' element={<Home />} />
+    </Routes>
     </BrowserRouter>
-   </>
+   
 
 
     /*<div className='min-h-screem bg-gray-50 p-6'>

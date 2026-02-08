@@ -14,3 +14,18 @@ The React Compiler is not enabled on this template because of its impact on dev 
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+
+## 📝 Diário de Bordo & Evolução
+
+### [Fevereiro de 2026] - Integração de Rotas e Filtros Inteligentes
+Nesta etapa, o foco foi transformar uma lista estática em uma ferramenta de busca dinâmica, aplicando conceitos avançados de Single Page Application (SPA).
+
+#### **O que foi superado:**
+- **Sincronização de Estado:** Resolvido o desafio de integrar o termo de busca (texto) com os filtros de categoria (botões), garantindo que os dados reflitam ambas as escolhas simultaneamente.
+- **Arquitetura de Rotas:** Implementação do `react-router-dom` para separar a "Home" da "Busca", eliminando recarregamentos de página desnecessários.
+- **Tratamento de Dados:** Transição de uma tela de erro ("Carregando dados") para uma interface resiliente que valida a chegada do JSON antes de renderizar os cards.
+
+#### **Impacto Visual:**
+
+![alt text](evolucaoProjetoEDiarista2.png)
