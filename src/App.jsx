@@ -1,10 +1,11 @@
 import './index.css'
-import DiaristasCards  from './components/DiaristasCard'
 import dados from './data/diaristas.json';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import  Busca  from './pages/Busca';
 import  Home  from './pages/Home';
+import DetalhesDiarista from './pages/DetalhesDiarista';
+
 
 function App() {
   
@@ -15,6 +16,8 @@ function App() {
     <Routes>
       <Route path='/' element={<Busca dadosDiaristas={dados}/>} />
       <Route path='/Home' element={<Home />} />
+      <Route path='/dadosDiaristas={dados}' element={<Busca />} />
+      <Route path='/diarista/:id' element={<DetalhesDiarista />} />
     </Routes>
     </BrowserRouter>
    

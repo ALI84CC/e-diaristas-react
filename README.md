@@ -29,3 +29,13 @@ Nesta etapa, o foco foi transformar uma lista estática em uma ferramenta de bus
 #### **Impacto Visual:**
 
 ![alt text](evolucaoProjetoEDiarista2.png)
+
+## 🚀 Changelog: Refatoração e UX
+
+Nesta fase do projeto **e-diarista-react**, apliquei os conhecimentos certificados pelo **IFRS** em React para elevar a maturidade da aplicação:
+
+- [cite_start]**Arquitetura de Rotas**: Implementação de `react-router-dom` para navegação fluida entre Home e Busca[cite: 16, 20].
+- **Filtros de Negócio**: Desenvolvimento de lógica para filtragem por avaliação (estrelas) e localização regional.
+- **Navbar Adaptável**: Criação de menu responsivo utilizando estados do React e classes utilitárias do Tailwind CSS.
+
+![alt text](responsividadeEdiarista.png)
