@@ -1,25 +1,50 @@
 import { useParams } from "react-router-dom"
 import dados from '../data/diaristas.json';
 import { Calendar, Info, DollarSign } from "lucide-react";
+import {  useNavigate} from "react-router-dom";
+import { useState } from "react";
 
 
 
 export default function DetalhesDiarista(){
 
+    const [dataAgendamento, setDataAgendamento] = useState("")
+
+    const handleAgendamento = (e) => {
+        e.preventDefault()
+        if(!dataAgendamento){
+            alert('Escolha uma data para o agendamento')
+            return
+        } 
+
+        const dataFormatada = new Date(dataAgendamento).toLocaleDateString('pt-BR', {timeZone: 'UTC'});
+        alert(`📅 Agendamento solicitado!\n\nProfissional: ${diaristaEncontrada.nome}\nData: ${dataFormatada}\n\nEntraremos em contato para confirmar!.`)
+    }
+
     const {id} = useParams()
     const diaristaEncontrada = dados.diaristas.find(d => d.id === Number(id));
 
-    console.log("ID da URL:", id);
-    console.log("Diarista encontrada:", diaristaEncontrada);
+    const navigate = useNavigate()
 
     if(!diaristaEncontrada){
         return <h2 className="text-center mt-10">Diarista nãoi encontrada</h2>
     }
+
     return(
         <main className="min-h-screen bg-gray-50 py-10 px-4">
-            <div className="max-w-4xl max-auto space-y-6">
+            <div className=" max-w-2xl mx-auto flex flex-col items-center space-y-6">
+                {/*botão de retorno*/}
+                <div className="w-full max-w-2xl">
+                  <button
+                    onClick={()=>navigate(-1)}
+                    className="mb-6 flex gap-2 text-gray-600 hover:text-blue-600 transition-colors font-medium group">
+                    <span className="group-hover:-translate-x-1 transition-transform">
+                        ←voltar para lista
+                    </span>
+                    </button>
+                </div>
                 {/*primeiro card */}
-             <section className="bg-white rounded-3xl border border-gray-300 shadow-md overflow-hidden" >
+             <section className="w-full max-w bg-white rounded-3xl border border-gray-300 shadow-md overflow-hidden" >
                 <div className="p-8">
                     <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
                                <img 
@@ -49,7 +74,7 @@ export default function DetalhesDiarista(){
                 </div>
             </section>
                  {/*segunda sessão: Formulario de contratação*/}
-            <section className="bg-white rounded-3xl border border-gray-200 sticky p-8">
+            <section className="w-full max-w bg-white rounded-3xl border border-gray-200 sticky p-8">
                 <div className="max-w-md max-auto text-center">
                     <h3 className="text-xl font-semibold mb-4 text-gray-500 uppercase tracking-wider text-center">
                         Contrate agora
@@ -68,10 +93,15 @@ export default function DetalhesDiarista(){
                         </label>
                         <input 
                         type="date" 
+                        value={dataAgendamento}
+                        onChange={(e) => setDataAgendamento(e.target.value)}
                         min={new Date().toISOString().split("T")[0]} 
                         className="w-full mt-1 p-4 rounded-2xl border border-gray-200 bg-gray-50 focus:ring-2 focus:ring-blue-500 outline-none transition" />
                     </div>
-                    <button type="button" className="w-full bg-blue-600 text-white font-extrabold py-5 rounded-2xl hover:bg-blue-700 transition-all shadow-xl shadow-blue-100 active:scale-95">
+                    <button
+                        onClick={handleAgendamento} 
+                        type="button" 
+                        className="w-full bg-blue-600 text-white font-extrabold py-5 rounded-2xl hover:bg-blue-700 transition-all shadow-xl shadow-blue-100 active:scale-95">
                         Confirmar Agendamento
                     </button>
                     </form>
