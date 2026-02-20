@@ -1,10 +1,39 @@
-import { useState } from "react"
-import DiaristasCards from "../components/DiaristasCard" 
+import { useState, useEffect } from "react" 
+import DiaristasCard from "../components/DiaristasCard" 
+import { db } from "../service/firebase" 
+import { collection, getDoc, getDocs, query, where } from "firebase/firestore"
 
 
-export default function Busca({ dadosDiaristas }) {
+export default function Busca() {
+
+  const [diarista, setDiarista] = useState([])
   const [termoBusca, setTermoBusca] = useState("")
   const [filtroAtivo, setFiltroAtivo] = useState("todas")
+  const [carregando, setCarregando] = useState(true)
+
+  useEffect(()=>{
+    const carregarDiarista = async () =>{
+      try {
+        setCarregando(true)
+
+        const querySnapShot = await getDocs(collection(db,"diarista"))
+        const listaDiaristas =  querySnapShot.docs.map(doc=>({
+          id: doc.id,
+          ...doc.data()
+        }))
+      console.log("Dados vindos do Firebase:", listaDiaristas)
+      setDiarista(listaDiaristas);
+      console.log("Total de diaristas carregadas:", listaDiaristas.length);
+        } catch (error) {
+        console.error("Erro ao carregar dados:", error);
+        } finally {
+        setCarregando(false);
+       }
+    }
+
+    carregarDiarista()
+  },[])
+
 
   const opcoesFiltro = [
     { id: 'todas', label: 'Todas' },
@@ -13,16 +42,16 @@ export default function Busca({ dadosDiaristas }) {
   ]
 
   // LÓGICA DE FILTRAGEM UNIFICADA (Onde a mágica acontece)
-  const profissionaisFiltrados = dadosDiaristas.diaristas.filter((item) => {
+  const profissionaisFiltrados = diarista.filter((item) => {
     // 1. Primeiro, checamos o filtro de texto (Nome ou Cidade)
     const matchesTexto = 
-      item.nome.toLowerCase().includes(termoBusca.toLowerCase()) ||
-      item.cidade.toLowerCase().includes(termoBusca.toLowerCase());
+      (item.nome?.toLowerCase() || "").includes(termoBusca.toLowerCase()) ||
+      (item.cidade?.toLowerCase() || "").includes(termoBusca.toLowerCase());
 
     // 2. Depois, checamos o filtro dos botões
     let matchesBotao = true;
     if (filtroAtivo === 'melhores') {
-      matchesBotao = item.avaliacao >= 4;
+      matchesBotao = (item.reputacao|| 0) >= 4;
     } else if (filtroAtivo === 'metropolitana') {
       matchesBotao = item.isMetropolitana === true;
     }
@@ -30,6 +59,10 @@ export default function Busca({ dadosDiaristas }) {
     // Retorna verdadeiro apenas se passar nos DOIS filtros ao mesmo tempo
     return matchesTexto && matchesBotao;
   });
+
+  if(carregando){
+    return <div className="text-center py-20">Carregando profissionais...</div>
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4">
@@ -75,7 +108,7 @@ export default function Busca({ dadosDiaristas }) {
         <main className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {profissionaisFiltrados.length > 0 ? (
             profissionaisFiltrados.map((item) => (
-              <DiaristasCards key={item.id} diaristas={item} />
+              <DiaristasCard key={item.id} diarista={item} />
             ))
           ) : (
             <div className="col-span-full text-center py-20 text-gray-400">

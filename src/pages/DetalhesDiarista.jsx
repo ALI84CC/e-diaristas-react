@@ -1,15 +1,39 @@
-import { useParams } from "react-router-dom"
-import dados from '../data/diaristas.json';
-import { Calendar, Info, DollarSign } from "lucide-react";
-import {  useNavigate} from "react-router-dom";
-import { useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { db } from "../service/firebase"; 
+import { doc, getDoc } from "firebase/firestore"; 
+import { Calendar, Info } from "lucide-react";
 
 
 
 export default function DetalhesDiarista(){
 
+    const {id} = useParams()
+    const [diaristaEncontrada, setDiaristaEncontrada] = useState(null);
+    {/*const diaristaEncontrada = dados.diaristas.find(d => d.id === Number(id));*/}
+    const navigate = useNavigate()
+    const[ carregando, setCarregando] = useState(true)
     const [dataAgendamento, setDataAgendamento] = useState("")
 
+    useEffect(()=>{
+        const buscarDiarista = async () =>{
+            try{
+                const docRef = doc(db,"diarista",id)
+                const docSnap = await getDoc(docRef)
+
+                if(docSnap.exists()){
+                    setDiaristaEncontrada({id: docSnap.id,...docSnap.data()})
+                }
+              } 
+                catch (error) {
+                    console.error("Erro ao buscar detalhes:", error);
+                } finally {
+                setCarregando(false);
+                }
+                };
+             if (id) buscarDiarista();
+            }, [id]);
+            
     const handleAgendamento = (e) => {
         e.preventDefault()
         if(!dataAgendamento){
@@ -21,10 +45,7 @@ export default function DetalhesDiarista(){
         alert(`📅 Agendamento solicitado!\n\nProfissional: ${diaristaEncontrada.nome}\nData: ${dataFormatada}\n\nEntraremos em contato para confirmar!.`)
     }
 
-    const {id} = useParams()
-    const diaristaEncontrada = dados.diaristas.find(d => d.id === Number(id));
-
-    const navigate = useNavigate()
+  
 
     if(!diaristaEncontrada){
         return <h2 className="text-center mt-10">Diarista nãoi encontrada</h2>
@@ -47,7 +68,7 @@ export default function DetalhesDiarista(){
              <section className="w-full max-w bg-white rounded-3xl border border-gray-300 shadow-md overflow-hidden" >
                 <div className="p-8">
                     <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
-                               <img 
+                        <img 
                         src={diaristaEncontrada.foto} 
                         className="w-48 h-48 rounded-2xl object-cover shadow-md border border-gray-100" 
                         alt={diaristaEncontrada.nome} />
