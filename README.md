@@ -28,7 +28,7 @@ Nesta etapa, o foco foi transformar uma lista estática em uma ferramenta de bus
 
 #### **Impacto Visual:**
 
-![alt text](evolucaoProjetoEDiarista2.png)
+![alt text](assets/screenshorts/evolucaoProjetoEDiarista2.png)
 
 ## 🚀 Changelog: Refatoração e UX
 
@@ -38,4 +38,17 @@ Nesta fase do projeto **e-diarista-react**, apliquei os conhecimentos certificad
 - **Filtros de Negócio**: Desenvolvimento de lógica para filtragem por avaliação (estrelas) e localização regional.
 - **Navbar Adaptável**: Criação de menu responsivo utilizando estados do React e classes utilitárias do Tailwind CSS.
 
-![alt text](responsividadeEdiarista.png)
+![alt text](assets/screenshorts/responsividadeEdiarista.png)
+
+
+## 🚀 Funcionalidades e Tecnologias
+
+Nesta fase do projeto **e-diarista-react**, implementamos a integração completa com o Firebase:
+
+- **Conexão com Banco de Dados**: Uso de `doc`, `getDoc` e `Collection` para persistência e recuperação de dados em tempo real.
+- **Autenticação (Firebase Auth)**: Implementação de fluxo de login com `signInWithEmailAndPassword` e monitoramento de estado com `onAuthStateChanged`, permitindo agendamentos apenas para usuários autenticados.
+- **Interface Responsiva**: Utilização do **Tailwind CSS** para estilização dos cards de diaristas e criação de modais de interação.
+- **Regras de Negócio**: Validação de formulários (como a obrigatoriedade da data de agendamento) e proteção de rotas.
+
+
+![alt text](assets/screenshorts/informacoesDiarista.png)

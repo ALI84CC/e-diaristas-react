@@ -3,12 +3,8 @@ import { Star } from "lucide-react";
 
 export default function DiaristasCard({diarista}){
 
-   {/* const navigate = useNavigate(); 
+    console.log("Dados recebidos no card:", diarista)
 
-    const handleVerDetalhes = () => {
-        navigate(`/diarista/${diaristas.id}`)
-    }  */}
- 
      if(!diarista) return null
 
     return(
@@ -18,7 +14,7 @@ export default function DiaristasCard({diarista}){
             alt={diarista.nome}
             className="w-full h-48 object-cover"
             />
-         <h3 className="font-bold mt-2 text-lg text-gray-800">{diarista.nome}</h3>
+         <h3 className="font-bold mt-2 text-lg text-gray-800">{diarista.nome || 'nome não informado'}</h3>
          <p className="text-gray-500 text-sm">{diarista.cidade}</p>
          
         <div className="flex items-center gap-1 mt-2 text-yellow-500">

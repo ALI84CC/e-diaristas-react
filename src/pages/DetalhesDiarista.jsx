@@ -1,25 +1,37 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { db } from "../service/firebase"; 
-import { doc, getDoc } from "firebase/firestore"; 
+import { addDoc, collection, doc,  getDoc } from "firebase/firestore"; 
 import { Calendar, Info } from "lucide-react";
-
+import {auth } from '../service/firebase'
+import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 
 
 export default function DetalhesDiarista(){
 
     const {id} = useParams()
     const [diaristaEncontrada, setDiaristaEncontrada] = useState(null);
-    {/*const diaristaEncontrada = dados.diaristas.find(d => d.id === Number(id));*/}
     const navigate = useNavigate()
     const[ carregando, setCarregando] = useState(true)
     const [dataAgendamento, setDataAgendamento] = useState("")
+    const [email, setEmail] = useState("")
+    const[password, setPassword] = useState("")
+    const[usuarioLogado,setUsuarioLogado] = useState("")
+    const[isModalOpen, SetIsModalOpen] = useState(false)
+
+
+    useEffect(()=>{
+        const unsubscribe = onAuthStateChanged(auth,(use)=>{
+            setUsuarioLogado(use)
+        })
+        return  () => unsubscribe()
+    },[])
 
     useEffect(()=>{
         const buscarDiarista = async () =>{
             try{
                 setCarregando(true)
-                
+
                 const docRef = doc(db,"diarista",id)
                 const docSnap = await getDoc(docRef)
 
@@ -35,16 +47,56 @@ export default function DetalhesDiarista(){
                 };
              if (id) buscarDiarista();
             }, [id]);
-            
-    const handleAgendamento = (e) => {
+
+     const handleLogin = async (email, password) => {
+        try {
+            await signInWithEmailAndPassword(auth, email, password);
+            alert("Login Efetuado");
+        } catch (error) {
+            console.error("Erro no login: ", error.code);
+        }
+    }
+
+    const handleAgendamento = async (e) => {
+
         e.preventDefault()
+
         if(!dataAgendamento){
-            alert('Escolha uma data para o agendamento')
+            alert("⚠️ Por favor, selecione uma data para o serviço antes de confirmar.")
+            return
+        }
+
+        if(!usuarioLogado){
+            SetIsModalOpen(true)
             return
         } 
+        
+        if (!dataAgendamento) {
+            alert("Por favor, escolha uma data.");
+            return;
+        }
 
-        const dataFormatada = new Date(dataAgendamento).toLocaleDateString('pt-BR', {timeZone: 'UTC'});
-        alert(`📅 Agendamento solicitado!\n\nProfissional: ${diaristaEncontrada.nome}\nData: ${dataFormatada}\n\nEntraremos em contato para confirmar!.`)
+        try{
+            await addDoc(collection(db,'diarista'),{
+                clienteId: usuarioLogado.uid,
+                clienteEmail: usuarioLogado.email,
+                diaristaId:diaristaEncontrada.id,
+                diaristaNome:diaristaEncontrada.nome,
+                data:dataAgendamento,
+                status:'pendente',
+                criadoEm: new Date()
+            })
+             alert("📅 Agendamento realizado com sucesso!");
+            setDataAgendamento("");
+
+        } 
+        catch (error){
+            console.error("Erro ao salvar o agendamento",error)
+             alert("Erro ao processar agendamento. Tente novamente.");
+        }
+
+        {/*const dataFormatada = new Date(dataAgendamento).toLocaleDateString('pt-BR', {timeZone: 'UTC'});
+        alert(`📅 Agendamento solicitado!\n\nProfissional: ${diaristaEncontrada.nome}\nData: ${dataFormatada}\n\nEntraremos em contato para confirmar!.`) */}
     }
 
   
@@ -54,6 +106,41 @@ export default function DetalhesDiarista(){
 
     return(
         <main className="min-h-screen bg-gray-50 py-10 px-4">
+            {isModalOpen && (
+                <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+                    <div className="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl ">
+                        <h2 className="text-2xl font-bold text-gray-900 mb-2">Entrar para Agendamento</h2>
+                        <p className="text-gray mb-6"> Você precisa esta logado para finalizar o agendamento</p>
+
+                        <div className="space-y-4">
+                            <input
+                            type="email"
+                            placeholder="E-mail"
+                            className="w-full p-4 rounded-xl border border-gray-200 bg-gray-50 outline-none focus:ring-2 focus:ring-blue-500"  
+                            onChange={(e) => setEmail(e.target.value)}
+                            />
+                            <input
+                            type="password"
+                            placeholder="senha"
+                            className="w-full p-4 rounded-xl border border-gray-200 bg-gray-50 outline-none focus:ring-2 focus:ring-blue-500" 
+                            onChange={(e) => setPassword(e.target.value)}
+                            />
+                            <button
+                                onClick={()=>handleLogin(email,password)
+                                    .then(()=>SetIsModalOpen(false))}
+                                className="w-full bg-blue-600  text-white font-bold py-4 rounded-xl hover:bg-blue-700 transition-all"
+                            > Entrar e Confirmar
+                            </button>
+                            <button
+                            onClick={()=>SetIsModalOpen(false)}
+                            className="w-full text-gray-400 text-sm font-medium hover:text-gray-600" 
+                            >
+                                Cancelar  
+                            </button>        
+                    </div>
+                    </div>
+                </div>
+        )}
             <div className=" max-w-2xl mx-auto flex flex-col items-center space-y-6">
                 {/*botão de retorno*/}
                 <div className="w-full max-w-2xl">
@@ -123,6 +210,7 @@ export default function DetalhesDiarista(){
                     <button
                         onClick={handleAgendamento} 
                         type="button" 
+                        disable={!dataAgendamento}
                         className="w-full bg-blue-600 text-white font-extrabold py-5 rounded-2xl hover:bg-blue-700 transition-all shadow-xl shadow-blue-100 active:scale-95">
                         Confirmar Agendamento
                     </button>

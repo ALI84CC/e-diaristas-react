@@ -2,6 +2,8 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore"; // Importante para o banco de dados
 import { getStorage } from "firebase/storage";     // Importante para as fotos
+import { getAuth } from "firebase/auth";
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyCk-EULAdDoEkUkUADoh2mu8TmgbcuQ9b4",
@@ -15,6 +17,8 @@ const firebaseConfig = {
 
 // Inicializa o Firebase
 const app = initializeApp(firebaseConfig);
+
+ export const auth = getAuth(app)
 
 // Exportamos as instâncias para usar nos outros arquivos
 export const db = getFirestore(app);
