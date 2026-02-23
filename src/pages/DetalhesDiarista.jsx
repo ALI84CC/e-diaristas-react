@@ -18,6 +18,8 @@ export default function DetalhesDiarista(){
     useEffect(()=>{
         const buscarDiarista = async () =>{
             try{
+                setCarregando(true)
+                
                 const docRef = doc(db,"diarista",id)
                 const docSnap = await getDoc(docRef)
 
@@ -46,10 +48,9 @@ export default function DetalhesDiarista(){
     }
 
   
+   if (carregando) return <div className="text-center py-20">Carregando detalhes...</div>;
 
-    if(!diaristaEncontrada){
-        return <h2 className="text-center mt-10">Diarista nãoi encontrada</h2>
-    }
+   if (!diaristaEncontrada) return <div className="text-center py-20">Profissional não encontrada</div>;
 
     return(
         <main className="min-h-screen bg-gray-50 py-10 px-4">

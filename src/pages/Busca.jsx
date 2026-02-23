@@ -11,28 +11,38 @@ export default function Busca() {
   const [filtroAtivo, setFiltroAtivo] = useState("todas")
   const [carregando, setCarregando] = useState(true)
 
-  useEffect(()=>{
-    const carregarDiarista = async () =>{
-      try {
-        setCarregando(true)
+  useEffect(() => {
 
-        const querySnapShot = await getDocs(collection(db,"diarista"))
-        const listaDiaristas =  querySnapShot.docs.map(doc=>({
-          id: doc.id,
-          ...doc.data()
-        }))
-      console.log("Dados vindos do Firebase:", listaDiaristas)
-      setDiarista(listaDiaristas);
-      console.log("Total de diaristas carregadas:", listaDiaristas.length);
+    console.log("Conectado ao projeto:", db.app.options.projectId);  
+
+    const carregarDiarista = async () => {
+        try {
+            setCarregando(true)
+
+            if(!db){
+              console.error("ERRO:O objeto 'db' não foi importado corretamente.")
+              return
+            }
+            const diaristaRef = collection(db, "diarista");
+            const querySnapShot = await getDocs(diaristaRef)
+
+            console.log("Status da busca:", querySnapShot.empty ? "Vazio" : "Dados encontrados");
+            console.log("Documentos na coleção 'diarista':", querySnapShot.size);
+  
+            const listaDiaristas = querySnapShot.docs.map(doc => ({
+                id: doc.id,
+                ...doc.data()
+            }));
+            
+            setDiarista(listaDiaristas);
         } catch (error) {
-        console.error("Erro ao carregar dados:", error);
+            console.error("ERRO DETALHADO:", error); // LOG 3
         } finally {
-        setCarregando(false);
-       }
+            setCarregando(false);
+        }
     }
-
-    carregarDiarista()
-  },[])
+    carregarDiarista();
+}, []);
 
 
   const opcoesFiltro = [
