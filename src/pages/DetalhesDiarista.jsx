@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { db } from "../service/firebase"; 
-import { addDoc, collection, doc,  getDoc } from "firebase/firestore"; 
+import { addDoc, collection, doc,  getDoc, getDocs, query, where } from "firebase/firestore"; 
 import { Calendar, Info } from "lucide-react";
 import {auth } from '../service/firebase'
 import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
@@ -18,6 +18,7 @@ export default function DetalhesDiarista(){
     const[password, setPassword] = useState("")
     const[usuarioLogado,setUsuarioLogado] = useState("")
     const[isModalOpen, SetIsModalOpen] = useState(false)
+    const[enviando, setEnviando] = useState(false)
 
 
     useEffect(()=>{
@@ -59,7 +60,7 @@ export default function DetalhesDiarista(){
 
     const handleAgendamento = async (e) => {
 
-        e.preventDefault()
+         e.preventDefault()
 
         if(!dataAgendamento){
             alert("⚠️ Por favor, selecione uma data para o serviço antes de confirmar.")
@@ -71,16 +72,29 @@ export default function DetalhesDiarista(){
             return
         } 
         
-        if (!dataAgendamento) {
-            alert("Por favor, escolha uma data.");
+        if (enviando) return
+            setEnviando(true)
+
+        try{
+
+         const q = query(
+            collection(db, "agendamentos"), 
+            where("clienteId", "==", usuarioLogado.uid),
+            where("data", "==", dataAgendamento)
+        );
+
+        const querySnapshot = await getDocs(q);
+
+        if (!querySnapshot.empty) {
+            alert("Você já tem um agendamento para esta data!");
             return;
         }
 
-        try{
-            await addDoc(collection(db,'diarista'),{
+
+        await addDoc(collection(db,'agendamentos'),{
                 clienteId: usuarioLogado.uid,
                 clienteEmail: usuarioLogado.email,
-                diaristaId:diaristaEncontrada.id,
+                diaristaId: id,
                 diaristaNome:diaristaEncontrada.nome,
                 data:dataAgendamento,
                 status:'pendente',
@@ -93,6 +107,8 @@ export default function DetalhesDiarista(){
         catch (error){
             console.error("Erro ao salvar o agendamento",error)
              alert("Erro ao processar agendamento. Tente novamente.");
+        } finally{
+            setEnviando(false)
         }
 
         {/*const dataFormatada = new Date(dataAgendamento).toLocaleDateString('pt-BR', {timeZone: 'UTC'});
@@ -210,9 +226,9 @@ export default function DetalhesDiarista(){
                     <button
                         onClick={handleAgendamento} 
                         type="button" 
-                        disable={!dataAgendamento}
+                        disabled={enviando}
                         className="w-full bg-blue-600 text-white font-extrabold py-5 rounded-2xl hover:bg-blue-700 transition-all shadow-xl shadow-blue-100 active:scale-95">
-                        Confirmar Agendamento
+                        {enviando ? "Salvando Agendamento..." : "Confirmar Agendamento"}
                     </button>
                     </form>
                 </div> 

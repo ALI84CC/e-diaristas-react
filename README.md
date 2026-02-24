@@ -51,4 +51,4 @@ Nesta fase do projeto **e-diarista-react**, implementamos a integração complet
 - **Regras de Negócio**: Validação de formulários (como a obrigatoriedade da data de agendamento) e proteção de rotas.
 
 
-![alt text](assets/screenshorts/informacoesDiarista.png)
+![alt text](../src/assets/screenshorts/cardDiarista.png)
