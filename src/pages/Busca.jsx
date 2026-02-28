@@ -34,7 +34,10 @@ export default function Busca() {
                 ...doc.data()
             }));
             
+            console.log("Lista processada para o Estado:", listaDiaristas);
             setDiarista(listaDiaristas);
+
+            
         } catch (error) {
             console.error("ERRO DETALHADO:", error); // LOG 3
         } finally {
@@ -42,7 +45,7 @@ export default function Busca() {
         }
     }
     carregarDiarista();
-}, []);
+  }, []);
 
 
   const opcoesFiltro = [

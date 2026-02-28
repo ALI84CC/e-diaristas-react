@@ -7,12 +7,14 @@ export default function DiaristasCard({diarista}){
 
      if(!diarista) return null
 
+     const idParaLink = diarista.id || diarista.diaristaId 
+
     return(
         <div className="border p-4 rounded-xl shadow-sm bg-white">
            <img 
-            src={diarista.foto || 'https://via.placeholder.com/400'}
+            src={diarista.foto || 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400'}
             alt={diarista.nome}
-            className="w-full h-48 object-cover"
+            className="w-full h-48 object-cover rounded-lg"
             />
          <h3 className="font-bold mt-2 text-lg text-gray-800">{diarista.nome || 'nome não informado'}</h3>
          <p className="text-gray-500 text-sm">{diarista.cidade}</p>
@@ -23,7 +25,7 @@ export default function DiaristasCard({diarista}){
         </div>
 
          < Link 
-         to={`/diarista/${diarista.id}`} 
+         to={`/diarista/${idParaLink}`} 
          className="block mt-4 text-center bg-blue-600 hover:bg-blue-700 text-white py-2.5 rounded-xl font-medium transition-colors"   
          >  
             Ver detalhes 

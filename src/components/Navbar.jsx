@@ -38,6 +38,23 @@ const navClass = ({isActive})=>
                 <NavLink to="/buscar" className={navClass}>
                     BUSCA
                 </NavLink>
+               <NavLink
+                to="/buscar"
+                className={({isActive})=>
+                    isActive ? "text-blue-600 font-bold" : "text-gray-600"
+                }>    
+               </NavLink>
+               <NavLink to="/login" className="px-4 py-2 text-gray-700 hover:text-blue-600">
+                    Entrar
+                </NavLink>
+               <NavLink 
+                 to="/cadastro" 
+                 className={({ isActive }) => 
+                   `px-4 py-2 rounded-lg font-bold transition ${isActive ? 'bg-blue-700' : 'bg-blue-600'} text-white`
+                 }>
+                    Criar Conta
+                </NavLink>
+                
             </div>
         </div>
        </nav>
