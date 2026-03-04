@@ -33,7 +33,7 @@ export default function DetalhesDiarista(){
             try{
                 setCarregando(true)
 
-                const docRef = doc(db,"diarista",id)
+                const docRef = doc(db,"usuarios",id)
                 const docSnap = await getDoc(docRef)
 
                 if(docSnap.exists()){
@@ -50,6 +50,9 @@ export default function DetalhesDiarista(){
             }, [id]);
 
      const handleLogin = async (email, password) => {
+       
+       
+
         try {
             await signInWithEmailAndPassword(auth, email, password);
             alert("Login Efetuado");
@@ -60,6 +63,11 @@ export default function DetalhesDiarista(){
 
     const handleAgendamento = async (e) => {
 
+        if(!auth.currentUser){
+            alert("Você precisa está logado para realizar um agendamento")
+            navigate("/login")
+            return
+        }
          e.preventDefault()
 
         if(!dataAgendamento){
@@ -207,6 +215,7 @@ export default function DetalhesDiarista(){
                      <div className="mt-4 flex gap-2 text-center ">
                             <span className="bg-blue-50 text-blue-700 px-3 py-1 rounded-md text-sm font-bold ">
                                 Valor/Hora: {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(diaristaEncontrada.valor_hora)}
+                                valor_hora: valor_hora || 100
                             </span>
                         </div>
                     

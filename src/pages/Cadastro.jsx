@@ -11,6 +11,10 @@ export default function Cadastro() {
   const [password, setPassword] = useState("");
   const [nome, setNome] = useState("");
   const [tipo, setTipo] = useState("cliente"); 
+  const [cidade, setCidade] = useState("");
+  const [descricao, setDescricao] = useState("");
+  const [isMetropolitana, setIsMetropolitana] = useState(false);
+  const [ foto, setFoto] = useState("")
   
   const navigate = useNavigate();
 
@@ -32,6 +36,10 @@ export default function Cadastro() {
         nome: nome,
         email: email,
         tipo: tipo,
+        cidade: cidade || "Não informada",
+        descricao: descricao || "",
+        isMetropolitana : isMetropolitana,
+        avaliacao: 5,
         criadoEm: new Date()
       };
 
@@ -80,6 +88,21 @@ export default function Cadastro() {
               />
               <MdOutlineEmail className="absolute right-3 top-3 text-gray-400" />
             </div>
+
+            <div className="relative">
+              <label className="block text-sm  font-medium text-gray-700">
+                Senha
+              </label>
+              <div className="relative">
+                <input
+                type="password"
+                value={password}
+                onChange={(e)=> setPassword(e.target.value)}
+                required
+                className="w-full pl-3 pr-10 py-2 border border-slate-200 rounded-md focus:outline-none focus:border-blue-500"
+                placeholder="Mínimo de 6 caracteres"/>
+                </div>
+            </div>
           </div>
 
           {/* Seleção de Tipo (Simplificada para teste) */}
@@ -108,6 +131,38 @@ export default function Cadastro() {
           </button>
         </div>
       </form>
+      {tipo === "diarista" && (
+          <div className="space-y-4 animate-in fade-in duration-500">
+            <input 
+            placeholder="URL da sua foto (ex:link do unsplash)"
+            value={foto}
+            onChange={(e) => setFoto(e.target.value)}
+            className="w-full p-2 border rounded"
+            />
+            <input 
+            type="text" 
+            placeholder="Sua cidade (ex:Ananindeua"
+            value={cidade}
+            onChange={(e) => setCidade(e.target.value)}
+            className="w-full p-2 border rounded"/>
+            
+            <textarea 
+            placeholder="conte um pouco a sua experiência"
+            value={descricao}
+            onChange={(e) => setDescricao(e.target.value)}
+            className="w-full p-2 border rounded" />
+
+
+             <label className="flex items-center gap-2">
+                <input 
+                type="checkbox"
+                cheked={isMetropolitana}
+                onChange={(e) => setIsMetropolitana(e.target.value)}
+                />
+                Atende região metropolitana?
+              </label> 
+          </div>
+      )}
     </section>
   );
 }

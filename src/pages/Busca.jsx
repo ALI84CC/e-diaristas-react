@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react" 
 import DiaristasCard from "../components/DiaristasCard" 
 import { db } from "../service/firebase" 
-import { collection, getDoc, getDocs, query, where } from "firebase/firestore"
+import { collection, getDocs, query, where } from "firebase/firestore"
 
 
 export default function Busca() {
@@ -15,35 +15,38 @@ export default function Busca() {
 
     console.log("Conectado ao projeto:", db.app.options.projectId);  
 
-    const carregarDiarista = async () => {
-        try {
-            setCarregando(true)
+  const carregarDiarista = async () => {
+    try {
+        setCarregando(true);
 
-            if(!db){
-              console.error("ERRO:O objeto 'db' não foi importado corretamente.")
-              return
-            }
-            const diaristaRef = collection(db, "diarista");
-            const querySnapShot = await getDocs(diaristaRef)
-
-            console.log("Status da busca:", querySnapShot.empty ? "Vazio" : "Dados encontrados");
-            console.log("Documentos na coleção 'diarista':", querySnapShot.size);
-  
-            const listaDiaristas = querySnapShot.docs.map(doc => ({
-                id: doc.id,
-                ...doc.data()
-            }));
-            
-            console.log("Lista processada para o Estado:", listaDiaristas);
-            setDiarista(listaDiaristas);
-
-            
-        } catch (error) {
-            console.error("ERRO DETALHADO:", error); // LOG 3
-        } finally {
-            setCarregando(false);
+        if(!db){
+          console.error("ERRO: O objeto 'db' não foi importado corretamente.");
+          return;
         }
+
+        const diaristaRef = collection(db, "usuarios");
+
+        // ✅ A MUDANÇA É AQUI: Criamos um filtro (query)
+        // Filtramos para trazer apenas documentos que tenham o campo 'tipo' como 'diarista'
+        const q = query(diaristaRef, where("tipo", "==", "diarista"));
+        
+        const querySnapShot = await getDocs(q); // Agora buscamos a query 'q', não a ref pura
+
+        console.log("Status da busca filtrada:", querySnapShot.empty ? "Vazio" : "Dados encontrados");
+        
+        const listaDiaristas = querySnapShot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data()
+        }));
+        
+        setDiarista(listaDiaristas);
+
+    } catch (error) {
+        console.error("ERRO DETALHADO:", error);
+    } finally {
+        setCarregando(false);
     }
+};
     carregarDiarista();
   }, []);
 
