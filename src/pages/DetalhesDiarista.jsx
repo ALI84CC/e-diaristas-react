@@ -212,13 +212,13 @@ export default function DetalhesDiarista(){
                     <h3 className="text-xl font-semibold mb-4 text-gray-500 uppercase tracking-wider text-center">
                         Contrate agora
                     </h3>
-                     <div className="mt-4 flex gap-2 text-center ">
-                            <span className="bg-blue-50 text-blue-700 px-3 py-1 rounded-md text-sm font-bold ">
-                                Valor/Hora: {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(diaristaEncontrada.valor_hora)}
-                                valor_hora: valor_hora || 100
-                            </span>
-                        </div>
-                    
+                   <div className="bg-blue-50 p-2 rounded-lg inline-block">
+                        <span className="text-blue-600 font-bold">
+                            {/* Usamos as chaves apenas para envolver a variável ou a lógica */}
+                            Valor/Hora: R$ {diaristaEncontrada.valor_hora || 100}
+                        </span>
+                    </div>
+                                    
                     <form className="space-y-6 mt-8">
                     <div className="text-left">
                         <label className="flex items-center  text-sm font-medium text-gray-700 mb-1">
