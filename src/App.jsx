@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import DetalhesDiarista from './pages/DetalhesDiarista';
 import Login from './pages/Login';
 import Cadastro from './pages/Cadastro'; 
+import { Perfil } from './components/Perfil';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path='/diarista/:id' element={<DetalhesDiarista />} />
         <Route path='/login' element={<Login />} />
         <Route path='/cadastro' element={<Cadastro />} /> 
+        <Route path='/perfil' element={<Perfil />} />
       </Routes>
     </BrowserRouter>
   );

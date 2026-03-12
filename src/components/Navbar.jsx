@@ -1,4 +1,4 @@
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import { Sparkle, XIcon, MenuIcon, LogOut } from "lucide-react" 
 import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom"
@@ -18,9 +18,9 @@ useEffect(() => {
     return ()=>unsubscrible()
 }, [])
 
-const handLogout = async () =>{
+const handleLogout = async () =>{
     try{
-        await singnOut(auth)
+        await signOut(auth)
         alert("Você saiu da conta")
         navigate("/login")
     } catch(error) {
@@ -61,14 +61,16 @@ const navClass = ({isActive})=>
                 <NavLink to="/buscar" className={navClass}>
                     BUSCA
                 </NavLink>
-
+                <NavLink to="/perfil" className={navClass}>
+                    PERFIL
+                </NavLink>
                 {user ?(
                     <div className="flex fle-col md:flex-row items-center gap-4 mt-4 md:mt-0">
                         <span className="text-gray-300 text-sm italic ">
                             Olá,{user.email.split('@')[0]}
                         </span>
                         <button
-                        onClick={handLogout}
+                        onClick={handleLogout}
                         className="flex items-center gap-2 px-4 text-red-400 houver:bg-red-900/20 rounded-md transition">
                             <LogOut size={18} />
                         </button>

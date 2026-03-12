@@ -12,6 +12,7 @@ export default function Cadastro() {
   const [nome, setNome] = useState("");
   const [tipo, setTipo] = useState("cliente"); 
   const [cidade, setCidade] = useState("");
+  const [ telefone, setTelefone] = useState("")
   const [descricao, setDescricao] = useState("");
   const [isMetropolitana, setIsMetropolitana] = useState(false);
   const [ foto, setFoto] = useState("")
@@ -37,6 +38,7 @@ export default function Cadastro() {
         email: email,
         tipo: tipo,
         cidade: cidade || "Não informada",
+        telefone: telefone || "Não informado",
         descricao: descricao || "",
         isMetropolitana : isMetropolitana,
         avaliacao: 5,
@@ -73,8 +75,6 @@ export default function Cadastro() {
               placeholder="Seu nome"
             />
           </div>
-
-          
           <div className="relative">
             <label className="block text-sm font-medium text-gray-700">E-mail</label>
             <div className="relative mt-1">
@@ -101,6 +101,24 @@ export default function Cadastro() {
                 required
                 className="w-full pl-3 pr-10 py-2 border border-slate-200 rounded-md focus:outline-none focus:border-blue-500"
                 placeholder="Mínimo de 6 caracteres"/>
+                </div>
+                <div className="space-y-4">
+                  <input
+                    type="text"
+                    value={cidade}
+                    onChange={(e) => setCidade(e.target.value)} // Adicionado o '>'
+                    required
+                    className="w-full pl-3 py-2 border border-slate-200 rounded-md focus:outline-none focus:border-blue-500"
+                    placeholder="Cidade Residente"
+                  />
+                  <input
+                    type="tel"
+                    value={telefone}
+                    onChange={(e) => setTelefone(e.target.value)} // Corrigido
+                    required
+                    className="w-full pl-3 py-2 border border-slate-200 rounded-md focus:outline-none focus:border-blue-500"
+                    placeholder="(91) 98474-4563"
+                  />
                 </div>
             </div>
           </div>
