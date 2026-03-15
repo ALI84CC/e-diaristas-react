@@ -64,6 +64,9 @@ const navClass = ({isActive})=>
                 <NavLink to="/perfil" className={navClass}>
                     PERFIL
                 </NavLink>
+                <NavLink to="/meusAgendamentos" className={navClass}>
+                    Meus Agendamentos
+                </NavLink>
                 {user ?(
                     <div className="flex fle-col md:flex-row items-center gap-4 mt-4 md:mt-0">
                         <span className="text-gray-300 text-sm italic ">
