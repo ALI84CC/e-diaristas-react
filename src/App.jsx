@@ -6,8 +6,8 @@ import Home from './pages/Home';
 import DetalhesDiarista from './pages/DetalhesDiarista';
 import Login from './pages/Login';
 import Cadastro from './pages/Cadastro'; 
-import { Perfil } from './components/Perfil';
-import { MeusAgendamentos } from './pages/MeusAgendamento';
+import  Perfil  from './components/Perfil';
+import  MeusAgendamentos  from './pages/MeusAgendamentos';
 
 function App() {
   return (
@@ -21,7 +21,7 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/cadastro' element={<Cadastro />} /> 
         <Route path='/perfil' element={<Perfil />} />
-        <Route path='/meusAgendamentos' element={<MeusAgendamentos />} />
+        <Route path="/meus-agendamentos" element={<MeusAgendamentos />} />
       </Routes>
     </BrowserRouter> 
   );

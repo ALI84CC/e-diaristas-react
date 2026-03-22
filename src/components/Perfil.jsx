@@ -4,7 +4,7 @@ import { doc, getDoc, setDoc } from "firebase/firestore";
 import { auth, db } from "../service/firebase"; 
 import { useNavigate } from "react-router-dom";
 
-export function Perfil() {
+export default function Perfil() {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
     const [userUid, setUserUid] = useState(null);
