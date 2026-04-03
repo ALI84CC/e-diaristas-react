@@ -87,6 +87,7 @@ export default function Perfil() {
             if (formData.tipo === "diarista") {
                 dadosParaGravar.descricao = formData.descricao || "";
                 dadosParaGravar.isMetropolitana = formData.isMetropolitana || false;
+                dadosParaGravar.telefone = formData.telefone || "";
             }
 
             // O 'merge: true' garante que o documento seja criado se não existir

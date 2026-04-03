@@ -20,6 +20,13 @@ export default function MeusAgendamentos() {
         return `${dia}/${mes}/${ano}`;
     };
 
+    const abrirWhatsapp = (telefone, nomeOutraPessoa, data) => {
+    const mensagem = encodeURIComponent(
+        `Olá ${nomeOutraPessoa}, sou do app e-diaristas. Gostaria de combinar os detalhes da faxina do dia ${formatarData(data)}.`
+    );
+    window.open(`https://wa.me/55${telefone.replace(/\D/g, "")}?text=${mensagem}`, "_blank");
+};
+
     // 3. FUNÇÃO DE AVALIAÇÃO (Precisa estar aqui para o Modal enxergar)
     const handleConfirmRating = async (newScore) => {
         if (!selecdAgendamento) return;
@@ -161,9 +168,25 @@ useEffect(() => {
                                         {(userType === 'diarista' ? item.clienteNome : item.diaristaNome)?.charAt(0) || "U"}
                                     </div>
                                     <div>
-                                        <p className="font-bold text-gray-800">{userType === 'diarista' ? item.clienteNome : item.diaristaNome}</p>
-                                        <p className="text-sm text-gray-500">Data: {formatarData(item.data)}</p>
-                                    </div>
+                                        <p className="font-bold text-gray-800">
+                                            {userType === 'diarista' ? item.clienteNome : item.diaristaNome}
+                                        </p>
+
+                                        {item.status === 'confirmado' && (
+                                        <button 
+                                            onClick={() => abrirWhatsapp(
+                                                userType === 'diarista' ? item.clienteTelefone : item.diaristaTelefone, 
+                                                userType === 'diarista' ? item.clienteNome : item.diaristaNome, 
+                                                item.data
+                                            )}
+                                            className="text-xs text-green-600 font-bold flex items-center gap-1 hover:underline mt-1"
+                                        >
+                                            💬 Combinar detalhes
+                                        </button>
+                                    )}
+
+                                    <p className="text-sm text-gray-500">Data: {formatarData(item.data)}</p>
+                                                    </div>
                                 </div>
 
                                 <div className="flex items-center gap-3">

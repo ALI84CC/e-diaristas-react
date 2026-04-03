@@ -47,12 +47,9 @@ export default function DetalhesDiarista(){
                 }
                 };
              if (id) buscarDiarista();
-            }, [id]);
+    }, [id]);
 
      const handleLogin = async (email, password) => {
-       
-       
-
         try {
             await signInWithEmailAndPassword(auth, email, password);
             alert("Login Efetuado");
@@ -70,15 +67,11 @@ export default function DetalhesDiarista(){
         }
          e.preventDefault()
 
+
         if(!dataAgendamento){
             alert("⚠️ Por favor, selecione uma data para o serviço antes de confirmar.")
             return
         }
-
-        if(!usuarioLogado){
-            SetIsModalOpen(true)
-            return
-        } 
         
         if (enviando) return
             setEnviando(true)
@@ -95,21 +88,41 @@ export default function DetalhesDiarista(){
 
         if (!querySnapshot.empty) {
             alert("Você já tem um agendamento para esta data!");
+            setEnviando(false);
             return;
         }
 
-
+        const clienteRef = doc(db,'usuarios',usuarioLogado.uid)
+        const clienteSnap = await getDoc(clienteRef)
+        const telefoneCliente = clienteSnap.exists() ? clienteSnap.data().telefone : ""
+        
+        
         await addDoc(collection(db,'agendamentos'),{
+                
                 clienteId: usuarioLogado.uid,
-                clienteEmail: usuarioLogado.email,
+                clienteNome : clienteSnap.exists() ? clienteSnap.data().nome : 'Cliente',
+                clienteTelefone: telefoneCliente,
+
+
                 diaristaId: id,
                 diaristaNome:diaristaEncontrada.nome,
+                diaristaTelefone: diaristaEncontrada.telefone || "",
+
                 data:dataAgendamento,
                 status:'pendente',
+                avaliacao: false,
                 criadoEm: new Date()
             })
+
+            if(docSnap.exists()){
+                const dados = {id: docSnap.id, ...docSnap.data()};
+                console.log("🔍 Dados da Diarista para o WhatsApp:", dados.telefone); // Verifique se aparece o número no console
+                setDiaristaEncontrada(dados);
+            }
+
              alert("📅 Agendamento realizado com sucesso!");
-            setDataAgendamento("");
+             setDataAgendamento("");
+             navigate("/meus-agendamentos")
 
         } 
         catch (error){
