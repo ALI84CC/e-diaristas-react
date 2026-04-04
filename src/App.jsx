@@ -13,18 +13,22 @@ import Footer from './components/Footer';
 function App() {
   return (
     <BrowserRouter>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} /> 
-        <Route path='/home' element={<Home />} />
-        <Route path='/buscar' element={<Busca />} />
-        <Route path='/diarista/:id' element={<DetalhesDiarista />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/cadastro' element={<Cadastro />} /> 
-        <Route path='/perfil' element={<Perfil />} />
-        <Route path="/meus-agendamentos" element={<MeusAgendamentos />} />   
-      </Routes>
-      <Footer />
+     <div className="flex flex-col min-h-screen bg-gray-50">
+        <Navbar />
+        <main className="flex-grow flex flex-col justify-center pt-20">
+          <Routes>
+            <Route path="/" element={<Home />} /> 
+            <Route path='/home' element={<Home />} />
+            <Route path='/buscar' element={<Busca />} />
+            <Route path='/diarista/:id' element={<DetalhesDiarista />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/cadastro' element={<Cadastro />} /> 
+            <Route path='/perfil' element={<Perfil />} />
+            <Route path="/meus-agendamentos" element={<MeusAgendamentos />} />   
+          </Routes>
+        </main>
+        <Footer />
+     </div> 
     </BrowserRouter> 
   );
 }
