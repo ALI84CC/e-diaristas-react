@@ -8,6 +8,7 @@ import Login from './pages/Login';
 import Cadastro from './pages/Cadastro'; 
 import  Perfil  from './components/Perfil';
 import  MeusAgendamentos  from './pages/MeusAgendamentos';
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -21,8 +22,9 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/cadastro' element={<Cadastro />} /> 
         <Route path='/perfil' element={<Perfil />} />
-        <Route path="/meus-agendamentos" element={<MeusAgendamentos />} />
+        <Route path="/meus-agendamentos" element={<MeusAgendamentos />} />   
       </Routes>
+      <Footer />
     </BrowserRouter> 
   );
 }
