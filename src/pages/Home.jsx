@@ -1,7 +1,8 @@
-
+import Comofunciona from '../components/ComoFunciona'
 
 export default function Home(){
     return(
+        <div className="flex flex-col">
         <section className="bg-gradient-to-b from-blue-50 to-white py-20 px-6">
             <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12">
                 <div className="flex-1 text-center md:text-left">
@@ -31,5 +32,7 @@ export default function Home(){
                 </div>
             </div>
         </section>
+        <Comofunciona />
+      </div>  
     )
 }

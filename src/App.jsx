@@ -15,7 +15,7 @@ function App() {
     <BrowserRouter>
      <div className="flex flex-col min-h-screen bg-gray-50">
         <Navbar />
-        <main className="flex-grow flex flex-col justify-center pt-20">
+        <main className="flex-grow pt-28 pb-20">
           <Routes>
             <Route path="/" element={<Home />} /> 
             <Route path='/home' element={<Home />} />
