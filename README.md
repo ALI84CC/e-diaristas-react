@@ -1,54 +1,45 @@
-# React + Vite
+# 🧹 e-Diaristas — Plataforma Web de Serviços Domésticos
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> Aplicação web desenvolvida em React.js e Tailwind CSS para conexão entre clientes e profissionais de limpeza doméstica, integrada com Firebase Authentication.
 
-Currently, two official plugins are available:
+[![Vercel](https://img.shields.io/badge/Deploy-Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://e-diaristas-react.vercel.app/)
+[![Figma](https://img.shields.io/badge/Design-Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white)](#)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 📌 Sobre o Projeto
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+O **e-Diaristas** é uma plataforma focada em facilitar a busca e contratação de serviços de diaristas. O projeto foi construído com foco em **componentização moderna, fidelidade ao design (Figma Handoff), responsividade e integração com serviços de autenticação em nuvem**.
 
-## Expanding the ESLint configuration
+### 🎯 Principais Funcionalidades
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **Landing Page Responsiva:** Apresentação clara dos serviços com navegação fluida (*Mobile-First*).
+- **Autenticação com Firebase:** Fluxo seguro de login e gestão de sessão de utilizadores.
+- **Painel/Dashboard:** Área reservada para agendamentos e navegação interna do perfil.
+- **Handoff Design-to-Code:** Tradução rigorosa do protótipo construído no Figma para componentes estilizados com Tailwind CSS.
 
+---
 
-## 📝 Diário de Bordo & Evolução
+## 🛠️ Tecnologias Utilizadas
 
-### [Fevereiro de 2026] - Integração de Rotas e Filtros Inteligentes
-Nesta etapa, o foco foi transformar uma lista estática em uma ferramenta de busca dinâmica, aplicando conceitos avançados de Single Page Application (SPA).
+- **Front-end:** React.js, JavaScript (ES6+), Tailwind CSS, Vite, Lucide React (Ícones).
+- **Roteamento:** React Router DOM.
+- **Backend-as-a-Service (BaaS):** Firebase (Authentication & Firestore).
+- **Deploy & CI/CD:** Vercel.
 
-#### **O que foi superado:**
-- **Sincronização de Estado:** Resolvido o desafio de integrar o termo de busca (texto) com os filtros de categoria (botões), garantindo que os dados reflitam ambas as escolhas simultaneamente.
-- **Arquitetura de Rotas:** Implementação do `react-router-dom` para separar a "Home" da "Busca", eliminando recarregamentos de página desnecessários.
-- **Tratamento de Dados:** Transição de uma tela de erro ("Carregando dados") para uma interface resiliente que valida a chegada do JSON antes de renderizar os cards.
+---
 
-#### **Impacto Visual:**
+## 🚀 Como Executar o Projeto Localmente
 
-![alt text](assets/screenshorts/evolucaoProjetoEDiarista2.png)
+```bash
+# Clonar o repositório
+git clone [https://github.com/ALI84CC/e-diaristas-react.git](https://github.com/ALI84CC/e-diaristas-react.git)
 
-## 🚀 Changelog: Refatoração e UX
+# Entrar na pasta do projeto
+cd e-diaristas-react
 
-Nesta fase do projeto **e-diarista-react**, apliquei os conhecimentos certificados pelo **IFRS** em React para elevar a maturidade da aplicação:
+# Instalar as dependências
+npm install
 
-- [cite_start]**Arquitetura de Rotas**: Implementação de `react-router-dom` para navegação fluida entre Home e Busca[cite: 16, 20].
-- **Filtros de Negócio**: Desenvolvimento de lógica para filtragem por avaliação (estrelas) e localização regional.
-- **Navbar Adaptável**: Criação de menu responsivo utilizando estados do React e classes utilitárias do Tailwind CSS.
-
-![alt text](assets/screenshorts/responsividadeEdiarista.png)
-
-
-## 🚀 Funcionalidades e Tecnologias
-
-Nesta fase do projeto **e-diarista-react**, implementamos a integração completa com o Firebase:
-
-- **Conexão com Banco de Dados**: Uso de `doc`, `getDoc` e `Collection` para persistência e recuperação de dados em tempo real.
-- **Autenticação (Firebase Auth)**: Implementação de fluxo de login com `signInWithEmailAndPassword` e monitoramento de estado com `onAuthStateChanged`, permitindo agendamentos apenas para usuários autenticados.
-- **Interface Responsiva**: Utilização do **Tailwind CSS** para estilização dos cards de diaristas e criação de modais de interação.
-- **Regras de Negócio**: Validação de formulários (como a obrigatoriedade da data de agendamento) e proteção de rotas.
-
-
-![alt text](../src/assets/screenshorts/cardDiarista.png)
+# Iniciar o servidor de desenvolvimento
+npm run dev
