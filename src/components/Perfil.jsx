@@ -122,7 +122,7 @@ export default function Perfil() {
                             name="nome" 
                             value={formData.nome} 
                             onChange={handleChange} 
-                            className="w-full p-3 rounded-xl border border-gray-200 outline-none focus:ring-1 focus:ring-blue-500" 
+                            className="w-full p-3 rounded-xl border border-gray-500 outline-none focus:ring-1 focus:ring-blue-500" 
                         />
                     </div>
 
@@ -132,7 +132,7 @@ export default function Perfil() {
                             name="cidade" 
                             value={formData.cidade} 
                             onChange={handleChange} 
-                            className="w-full p-3 rounded-xl border border-gray-200 outline-none focus:ring-1 focus:ring-blue-500" 
+                            className="w-full p-3 rounded-xl border border-gray-500 outline-none focus:ring-1 focus:ring-blue-500" 
                             placeholder="Ex: Ananindeua"
                         />
                     </div>
@@ -143,7 +143,7 @@ export default function Perfil() {
                             name="telefone" 
                             value={formData.telefone} 
                             onChange={handleChange} 
-                            className="w-full p-3 rounded-xl border border-gray-200 outline-none focus:ring-1 focus:ring-blue-500" 
+                            className="w-full p-3 rounded-xl border border-gray-500 outline-none focus:ring-1 focus:ring-blue-500" 
                             placeholder="(91) 9XXXX-XXXX"
                         />
                     </div>
@@ -156,7 +156,7 @@ export default function Perfil() {
                                     name="descricao" 
                                     value={formData.descricao} 
                                     onChange={handleChange} 
-                                    className="w-full p-3 rounded-xl border border-gray-200 outline-none focus:ring-1 focus:ring-blue-500 h-24 resize-none" 
+                                    className="w-full p-3 rounded-xl border border-gray-500 outline-none focus:ring-1 focus:ring-blue-500 h-24 resize-none" 
                                 />
                             </div>
                             <div className="flex items-center gap-3 p-2 bg-blue-50 rounded-xl">

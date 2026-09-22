@@ -46,7 +46,7 @@ export default function ComoFunciona() {
           {passos.map((passo, index) => {
             const Icone = passo.icon; // Importante para renderizar o componente
             return (
-              <div key={index} className="bg-gray-50 p-8 rounded-3xl border border-gray-100 flex flex-col items-center text-center group hover:border-blue-100 hover:bg-white transition-all duration-300 hover:shadow-lg">
+              <div key={index} className="bg-gray-50 p-8 rounded-3xl border border-gray-600 flex flex-col items-center text-center group hover:border-blue-600 hover:bg-white transition-all duration-300 hover:shadow-lg">
                 
                 {/* O ÍCONE COM FUNDO COLORIDO */}
                 <div className={`${passo.bgColor} p-6 rounded-2xl mb-6 group-hover:scale-110 transition-transform`}>

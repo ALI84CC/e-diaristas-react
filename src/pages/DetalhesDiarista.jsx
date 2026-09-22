@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { db } from "../service/firebase"; 
-import { addDoc, collection, doc,  getDoc, getDocs, query, where } from "firebase/firestore"; 
+import { addDoc, collection, doc,  documentSnapshotFromJSON,  getDoc, getDocs, query, where } from "firebase/firestore"; 
 import { Calendar, Info } from "lucide-react";
 import {auth } from '../service/firebase'
 import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
@@ -114,8 +114,8 @@ export default function DetalhesDiarista(){
                 criadoEm: new Date()
             })
 
-            if(docSnap.exists()){
-                const dados = {id: docSnap.id, ...docSnap.data()};
+            if(documentSnapshotFromJSON.exists()){
+                const dados = {id: documentSnapshotFromJSON.id, ...documentSnapshotFromJSON.data()};
                 console.log("🔍 Dados da Diarista para o WhatsApp:", dados.telefone); // Verifique se aparece o número no console
                 setDiaristaEncontrada(dados);
             }
@@ -153,13 +153,13 @@ export default function DetalhesDiarista(){
                             <input
                             type="email"
                             placeholder="E-mail"
-                            className="w-full p-4 rounded-xl border border-gray-200 bg-gray-50 outline-none focus:ring-2 focus:ring-blue-500"  
+                            className="w-full p-4 rounded-xl border border-gray-600 bg-gray-600 outline-none focus:ring-2 focus:ring-blue-700"  
                             onChange={(e) => setEmail(e.target.value)}
                             />
                             <input
                             type="password"
                             placeholder="senha"
-                            className="w-full p-4 rounded-xl border border-gray-200 bg-gray-50 outline-none focus:ring-2 focus:ring-blue-500" 
+                            className="w-full p-4 rounded-xl border border-gray-600 bg-gray-600 outline-none focus:ring-2 focus:ring-blue-700" 
                             onChange={(e) => setPassword(e.target.value)}
                             />
                             <button
@@ -190,7 +190,7 @@ export default function DetalhesDiarista(){
                     </button>
                 </div>
                 {/*primeiro card */}
-             <section className="w-full max-w bg-white rounded-3xl border border-gray-300 shadow-md overflow-hidden" >
+             <section className="w-full max-w bg-white rounded-3xl border border-gray-700 shadow-md overflow-hidden" >
                 <div className="p-8">
                     <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
                         <img 
@@ -202,13 +202,13 @@ export default function DetalhesDiarista(){
                             <span className="inline-block bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-semibold mt-2">
                                 Profissional Verificada
                             </span>    
-                            <p className="text-gray-500 mt-3 flex items-center justify-center md:justify-start gap-1">
+                            <p className="text-gray-700 mt-3 flex items-center justify-center md:justify-start gap-1">
                                 ⭐ <span className="text-yellow-500 font-bold">{diaristaEncontrada.avaliacao} (45 avaliações)</span>
                             </p>    
                         </div>
                     </div>  
 
-                     <div className="mt-10 border-t border-gray-100 pt-8"> 
+                     <div className="mt-10 border-t border-gray-500 pt-8"> 
                         <h2 className="text-xl font-bold mb-4 text-gray-800 flex items-center gap-2">
                            <Info size={20} className="text-blue-600"  />Sobre Mim:  
                         </h2>
@@ -220,9 +220,9 @@ export default function DetalhesDiarista(){
                 </div>
             </section>
                  {/*segunda sessão: Formulario de contratação*/}
-            <section className="w-full max-w bg-white rounded-3xl border border-gray-200 sticky p-8">
+            <section className="w-full max-w bg-white rounded-3xl border border-gray-600 sticky p-8">
                 <div className="max-w-md max-auto text-center">
-                    <h3 className="text-xl font-semibold mb-4 text-gray-500 uppercase tracking-wider text-center">
+                    <h3 className="text-xl font-semibold mb-4 text-gray-700 uppercase tracking-wider text-center">
                         Contrate agora
                     </h3>
                    <div className="bg-blue-50 p-2 rounded-lg inline-block">
@@ -243,7 +243,7 @@ export default function DetalhesDiarista(){
                         value={dataAgendamento}
                         onChange={(e) => setDataAgendamento(e.target.value)}
                         min={new Date().toISOString().split("T")[0]} 
-                        className="w-full mt-1 p-4 rounded-2xl border border-gray-200 bg-gray-50 focus:ring-2 focus:ring-blue-500 outline-none transition" />
+                        className="w-full mt-1 p-4 rounded-2xl border border-gray-600 bg-gray-50 focus:ring-2 focus:ring-blue-700 outline-none transition" />
                     </div>
                     <button
                         onClick={handleAgendamento} 

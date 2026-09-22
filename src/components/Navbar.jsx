@@ -45,7 +45,7 @@ const navClass = ({isActive})=>
 
             <button 
                 onClick={()=>setIsOpen(!isOpen)}
-                className=" md:hidden text-gray-300 hover:text-white">
+                className=" md:hidden text-gray-300 hover:text-white min-h-[48px] min-w-[48px]">
                 {isOpen? <XIcon size={28} />:<MenuIcon size={28} />}
             </button>
 
@@ -69,12 +69,12 @@ const navClass = ({isActive})=>
                 </NavLink>
                 {user ?(
                     <div className="flex fle-col md:flex-row items-center gap-4 mt-4 md:mt-0">
-                        <span className="text-gray-300 text-sm italic ">
+                        <span className="text-gray-600 text-sm italic ">
                             Olá,{user.email.split('@')[0]}
                         </span>
                         <button
                         onClick={handleLogout}
-                        className="flex items-center gap-2 px-4 text-red-400 houver:bg-red-900/20 rounded-md transition">
+                        className="flex items-center gap-2 px-4 text-red-400 houver:bg-red-900/20 rounded-md transition min-h-[48px] min-w-[48px]">
                             <LogOut size={18} />
                         </button>
                     </div>
@@ -82,7 +82,7 @@ const navClass = ({isActive})=>
                 <div className="flex flex-col md:flex-row  gap-2 mt-4 md:mt-0">
                         <NavLink 
                         to="/login" 
-                        className="px-4 py-2 text-gray-300 hover:text-white text-sm  font-medium">
+                        className="px-4 py-2 text-gray-600 hover:text-white text-sm  font-medium">
                             Entrar
                         </NavLink>
                         <NavLink 
