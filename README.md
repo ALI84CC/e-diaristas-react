@@ -13,7 +13,7 @@ Aplicação web para conectar clientes com profissionais de limpeza doméstica.
 
 ### Tela Principal do Projeto
 
-<img src="caminho/da/sua-imagem.png" alt="Tela Principal do Projeto" width="600" />
+<img src="dashboard.png" alt="Tela Principal do Projeto" width="600" />
 
 ### Tecnologias que usei
 
