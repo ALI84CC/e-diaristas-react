@@ -63,7 +63,7 @@ export default function Cadastro() {
     <section className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
       <form
         onSubmit={signupWithEmail}
-        className="w-full w-96 bg-white p-8 rounded-3xl border border-gray-200 shadow-sm"
+        className="w-full bg-white p-8 rounded-3xl border border-gray-200 shadow-sm"
       >
         <h2 className="text-2xl font-bold mb-6 text-center text-slate-800">
           Crie sua conta
