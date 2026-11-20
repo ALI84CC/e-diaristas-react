@@ -13,7 +13,9 @@ Aplicação web para conectar clientes com profissionais de limpeza doméstica.
 
 ### Tela Principal do Projeto
 
-<img src="assets/dashboard.png" alt="Tela Principal do Projeto" width="600" />
+<p align="center">
+  <img src="assets/dashboard.png" alt="Tela Principal do Projeto" width="600" />
+</p>
 
 ### Tecnologias que usei
 
@@ -25,10 +27,19 @@ Aplicação web para conectar clientes com profissionais de limpeza doméstica.
 
 ### Como rodar na sua máquina
 
+```bash
+# 1. Clone o repositório
 git clone https://github.com/ALI84CC/e-diaristas-react
+
+# 2. Entre na pasta do projeto
 cd e-diaristas-react
+
+# 3. Instale as dependências
 npm install
+
+# 4. Rode o projeto
 npm run dev
+```
 
 ### Login para testar
 
