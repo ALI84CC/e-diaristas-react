@@ -43,8 +43,12 @@ npm run dev
 
 ### Login para testar
 
+```bash
+
 Email: teste@teste.com.br
 Senha: 123456
+
+```
 
 ### O que eu aprendi nesse projeto
 
